@@ -3,28 +3,38 @@ namespace StoreApp;
     public class Authentication
     {
 
-        // private string username 
-        // {
-        //     get { return username; }   // get method
-        //     set { username = value; }  // set method
-        // }
-        // private string passWord  
-        // {
-        //     get { return passWord; }   // get method
-        //     set { passWord = value; }  // set method
-        // }
+        private string username;
+        private string passWord;
 
-        // public Authentication() {
-        //     this.username = "Default";
-        //     this.passWord = "Default";
-        // }
+        public Authentication() {
+            this.username = "Default";
+            this.passWord = "Default";
+        }
 
-        // public Authentication(string user, string pass) {
-        //     this.username = user;
-        //     this.passWord = pass;
-        // }
+        public Authentication(string user, string pass) {
+            this.username = user;
+            this.passWord = pass;
+        }
 
-        public void GetStarted() {
+        public string setPassword(string s) {
+            this.passWord = s;
+            return this.passWord;
+        }
+
+        public string setUsername(string s) {
+            this.username = s;
+            return this.username;
+        }
+
+        public string getPassword() {
+            return this.passWord;
+        }
+
+        public string getUsername() {
+            return this.username;
+        }
+
+        public bool GetStarted() {
 
             //Initial Prompt for User Authentication
             Prompt:
@@ -49,7 +59,7 @@ namespace StoreApp;
                 goto Prompt;
             }
 
-            if (response == "") {
+            if (response.Trim() == "") {
                 Console.WriteLine("\n Sorry, I didn't quite get that. Let's try again: ");
                 goto Prompt;
             }
@@ -60,15 +70,15 @@ namespace StoreApp;
                 Console.WriteLine("\n" + "===============================================================");
                 Console.WriteLine("Great! Let's move to the login screen.");
                 Console.WriteLine("===============================================================");
-                Login();
+                return true;
             }
             //User does not have an account and answered no.
             else if (responseArray[0].Equals('N'))
             {
-                Console.WriteLine("\n\n\n\n\n\n" + "===============================================================");
+                Console.WriteLine("\n\n\n" + "===============================================================");
                 Console.WriteLine("Great! Let's create an account.");
-                Console.WriteLine("===============================================================");
-                SignUp();
+                Console.WriteLine("===============================================================" + "\n\n\n");
+                return false;
             }
             //User did not answer with a Y or N
             else
@@ -84,7 +94,7 @@ namespace StoreApp;
             Console.WriteLine("===============================================================");
             Console.WriteLine("Username: ");
             Console.WriteLine("===============================================================");
-            Console.WriteLine("\n [To go back and sign up, type 'X' and hit enter at any time.] \n");
+            // Console.WriteLine("\n [To go back and sign up, type 'X' and hit enter at any time.] \n");
 
             string user = "";
 
@@ -100,11 +110,11 @@ namespace StoreApp;
                 goto Username;
             }
 
-            if (user.Equals("X")) 
-            {
-                GetStarted();
-                goto End;
-            }
+            // if (user.Equals("X")) 
+            // {
+            //     GetStarted();
+            //     goto End;
+            // }
 
             if (user.Length < 3 || user.Length > 12) {
                 Console.WriteLine("\n Sorry, I didn't quite get that. Let's try again: ");
@@ -139,21 +149,51 @@ namespace StoreApp;
                 goto Username;
             } else {
 
+                int dollars = new Random().Next(10, 150);
+                int cents = new Random().Next(1, 100);
+                //"Your total balance is: {num}"
+                //Propogate database with UUID, Login, Password, and new Balance
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+                Thread.Sleep(300);
+                Console.WriteLine("===============================================================");
+
+                Console.WriteLine($"\n    |  You're all set! Your remaining balance is: ${dollars}.{cents}  |"); 
+
             }
 
-            End:
-            if (user.Equals("X")) {
-                // Do something?
-            }
+            this.username = user;
+            this.passWord = pass;
+
+            /**
+            *
+            *   Retrieve logged in user's balance and display it here
+            *
+            */
         }
 
         public void SignUp() {
 
             Username:
-            Console.WriteLine("===============================================================");
+            Console.WriteLine("\n\n\n" + "===============================================================");
             Console.WriteLine("Enter your new username below: ");
             Console.WriteLine("===============================================================");
-            Console.WriteLine("\n [To go back and login, type 'X' and hit enter at any time.] \n");
+            // Console.WriteLine("\n [To go back and login, type 'X' and hit enter at any time.] \n");
 
             string user = "";
 
@@ -169,10 +209,11 @@ namespace StoreApp;
                 goto Username;
             }
 
-            if (user.Equals("X")) 
-            {
-                GetStarted();
-                goto End;
+            if (user.Length < 3 || user.Length > 12) {
+                Console.WriteLine("\n Sorry, I didn't quite get that. Let's try again: ");
+                //e.toString();
+                //Add error logging to text files
+                goto Username;
             }
                 // Verify given string matches a database entry and then proceed to password
                 //If (response matches DB entry) { proceed } else { Console.WriteLine("Username not found."); goto Username;  }
@@ -230,10 +271,8 @@ namespace StoreApp;
                 Console.WriteLine($"\n    |  You're all set! Your remaining balance is: ${dollars}.{cents}  |");                
             }
 
-            End:
-            if (user.Equals("X")) {
-                // Do something?
-            }
+            this.username = user;
+            this.passWord = pass;
         }
         
     }
